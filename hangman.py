@@ -62,35 +62,33 @@ words = 'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote cr
 
 i=random.randint(1,len(words))
 print (words[i])
-print(words[len(words)-1])
-j=random.randint(1,len(HANGMANPICS))
-print(j)
-print(HANGMANPICS[j-1])
+print(HANGMANPICS[0])
 
 secretword=words[i]
 #the classic programming way
-coveredword=''
-for k in range(0,len(words[i])):
-  coveredword+='_ '
-print(coveredword)
+#coveredword=''
+#for k in range(0,len(words[i])):
+#  coveredword+='_ '
+#print(coveredword)
 
 # the python way
 coveredword='_ '*len(words[i])
 print(coveredword)
 
-count=0
+
 correctcount=0
+wrongcount=0
 correctletters=''
 wrongletters=''
 
-while count <=6 and correctcount<len(secretword):
-  count+=1
+while wrongcount <=5 and correctcount<len(secretword):
+
   
   l=''
   while (len(l)!=1) or (l not in'abcdefghijklmnopqrstuvwxyz') and (l!='.'):
-    print('Guess one letter')
+    print('Guess one letter',end='')
     l=input().lower()
-  print(l)
+
   if l in correctletters or l in wrongletters:
     print('Already chosen')
   else:
@@ -102,8 +100,11 @@ while count <=6 and correctcount<len(secretword):
           correctcount+=1
     else:
       wrongletters=wrongletters+l
-      print('Wrong')
-  print(correctletters,' ' , wrongletters)
+      wrongcount+=1
+      print('Wrong',wrongcount)
+      print(HANGMANPICS[wrongcount])
+      
+  #print(correctletters,' ' , wrongletters)
   coveredword=''
   for x in secretword:
     if x in correctletters:
@@ -113,6 +114,7 @@ while count <=6 and correctcount<len(secretword):
   print(coveredword)
 
 if len(secretword)>correctcount:
-  print('Sorry you lost',correctcount,count)
+  print('Sorry you lost',correctcount,'-',wrongcount)
+  print('The secret word was:',secretword)
 else:
-  print('Bravo',correctcount,count)
+  print('Bravo!',correctcount,'-',wrongcount)
