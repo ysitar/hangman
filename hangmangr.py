@@ -88,7 +88,7 @@ def substletters(l):
   elif l=='ο':
     x= 'ό'
   elif l=='υ':
-    x= 'υ'
+    x= 'ύ'
   elif l=='ω':
     x= 'ώ'
   return x
@@ -126,18 +126,19 @@ while wrongcount <=5 and correctcount<len(secretword):
   if l in correctletters or l in wrongletters or l2 in correctletters or l2 in wrongletters:
     print('Already chosen')
   else:
-    if l in secretword :
-      correctletters=correctletters+l
-      print('Right')
-      for x in secretword:
-        if x==l:
-          correctcount+=1
-    elif l2 in secretword:
-      correctletters=correctletters+l2
-      print('Right')
-      for x in secretword:
-        if x ==l2:
-          correctcount+=1
+    if l in secretword or l2 in secretword:
+      if l in secretword:
+        correctletters=correctletters+l
+        print('Right')
+        for x in secretword:
+          if x==l:
+            correctcount+=1
+      if l2!=l and l2 in secretword:
+        correctletters=correctletters+l2
+        print('Right')
+        for x in secretword:
+          if x ==l2:
+            correctcount+=1
     else:
       wrongletters=wrongletters+l
       wrongcount+=1
